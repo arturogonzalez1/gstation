@@ -17,9 +17,11 @@ namespace GStation.Api.Controllers
         }
 
         [HttpPost("login")]
-        public void Login([FromBody] string value)
+        public async Task<ActionResult<Response<UserLoginTokenDto>>> Login([FromBody] UserLoginDto userLoginDto)
         {
+            var response = await _authService.Login(userLoginDto);
 
+            return Ok(response);
         }
 
         [HttpPost("signup")]
@@ -29,6 +31,8 @@ namespace GStation.Api.Controllers
 
             return Ok();
         }
+
+        // TODO: recovery password
 
     }
 }
