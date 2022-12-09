@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GStation.Mapping\GStation.Mapping.csproj" />
+    <ProjectReference Include="..\GStation.Mapping\GStation.Core.Mapping.csproj" />
     <ProjectReference Include="..\GStation.Persistence.EF\GStation.Persistence.EF.csproj" />
     <ProjectReference Include="..\GStation.Services\GStation.Services.csproj" />
   </ItemGroup>

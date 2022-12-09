@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GStation.Props\GStation.Props.csproj" />
+    <ProjectReference Include="..\GStation.Props\GStation.Core.Props.csproj" />
   </ItemGroup>
 
 </Project>
