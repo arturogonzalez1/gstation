@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace GStation.Persistence.EF.Seed
 {
@@ -18,10 +19,15 @@ namespace GStation.Persistence.EF.Seed
                     var context = service.GetRequiredService<ApplicationDbContext>();
                     var userManager = service.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = service.GetRequiredService<RoleManager<ApplicationRole>>();
+                    var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+                    var isDevelop = environment == Environments.Development;
 
                     context.Database.Migrate();
 
                     roleManager.Seed();
+                    userManager.Seed(isDevelop);
+
                 }
                 catch (Exception ex)
                 {
