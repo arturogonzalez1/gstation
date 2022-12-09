@@ -23,19 +23,11 @@ namespace GStation.Api.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<ActionResult<Response<bool>>> Signup([FromBody] UserSignupDto userSignInDto)
+        public async Task<ActionResult> Signup([FromBody] UserSignupDto userSignInDto)
         {
-            try
-            {
-                await _authService.Signup(userSignInDto);
+            await _authService.Signup(userSignInDto);
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
+            return Ok();
         }
 
     }
