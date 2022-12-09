@@ -19,4 +19,8 @@
     <ProjectReference Include="..\GStation.Core.Models\GStation.Core.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Seed\Fixtures\" />
+  </ItemGroup>
+
 </Project>

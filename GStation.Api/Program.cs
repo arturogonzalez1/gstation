@@ -1,5 +1,10 @@
+using AutoMapper;
 using GStation.Core.Models;
+using GStation.Mapping;
 using GStation.Persistence.EF;
+using GStation.Persistence.EF.Seed;
+using GStation.Services;
+using GStation.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -36,12 +41,22 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddAutoMapper(builder => builder.AddProfiles(new List<Profile>
+{
+    new UserMapping(),
+}));
+
+builder.Services.AddTransient<IAuthService, AuthService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Initializing Database
+app.Services.InitializeDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
