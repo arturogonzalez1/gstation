@@ -1,6 +1,6 @@
 using AutoMapper;
 using GStation.Core.Models;
-using GStation.Mapping;
+using GStation.Core.Mapping;
 using GStation.Persistence.EF;
 using GStation.Persistence.EF.Seed;
 using GStation.Services;
@@ -44,6 +44,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 builder.Services.AddAutoMapper(builder => builder.AddProfiles(new List<Profile>
 {
     new UserMapping(),
+    new PersonMapping(),
 }));
 
 builder.Services.AddTransient<IAuthService, AuthService>();

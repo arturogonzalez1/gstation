@@ -14,6 +14,8 @@ namespace GStation.Persistence.EF
 
         }
 
+        public DbSet<Person> Persons { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

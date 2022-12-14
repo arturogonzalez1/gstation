@@ -1,4 +1,5 @@
 ﻿using GStation.Core.Models;
+using GStation.Persistence.EF.Seed.Fixtures;
 using GStation.Props.Constants;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
@@ -15,6 +16,8 @@ namespace GStation.Persistence.EF.Seed
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = "superadmin@gstation.com";
                 user.Email = "superadmin@gstation.com";
+                user.Person = PersonFixture.GetPerson();
+                user.Person.Name = "Super Admin";
 
                 var result = userManager.CreateAsync(user, "P@ssw0rd1!").Result;
 
@@ -35,6 +38,8 @@ namespace GStation.Persistence.EF.Seed
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = "admin@gstation.com";
                 user.Email = "admin@gstation.com";
+                user.Person = PersonFixture.GetPerson();
+                user.Person.Name = "Admin";
 
                 var result = userManager.CreateAsync(user, "P@ssw0rd1!").Result;
 
@@ -50,6 +55,8 @@ namespace GStation.Persistence.EF.Seed
                 ApplicationUser user = new ApplicationUser();
                 user.UserName = "customer@gstation.com";
                 user.Email = "customer@gstation.com";
+                user.Person = PersonFixture.GetPerson();
+                user.Person.Name = "Customer";
 
                 var result = userManager.CreateAsync(user, "P@ssw0rd1!").Result;
 
@@ -57,21 +64,6 @@ namespace GStation.Persistence.EF.Seed
                 {
                     userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, Role.CUSTOMER)).Wait();
                     userManager.AddToRoleAsync(user, Role.CUSTOMER).Wait();
-                }
-            }
-
-            if (userManager.FindByEmailAsync("driver@gstation.com").Result == null)
-            {
-                ApplicationUser user = new ApplicationUser();
-                user.UserName = "driver@gstation.com";
-                user.Email = "driver@gstation.com";
-
-                var result = userManager.CreateAsync(user, "P@ssw0rd1!").Result;
-
-                if (result.Succeeded)
-                {
-                    userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, Role.DRIVER)).Wait();
-                    userManager.AddToRoleAsync(user, Role.DRIVER).Wait();
                 }
             }
 

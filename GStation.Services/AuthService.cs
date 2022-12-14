@@ -34,7 +34,15 @@ namespace GStation.Services
 
             var user = _mapper.Map<ApplicationUser>(userSignupDto);
 
-            await _userManager.CreateAsync(user, userSignupDto.Password);
+            var result = await _userManager.CreateAsync(user, userSignupDto.Password);
+
+            if (!result.Succeeded)
+            {
+                var errors = String.Join(" ", result.Errors.Select(error => error.Description));
+
+                throw new CustomValidationException(errors);
+            }
+
             await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, userSignupDto.Role));
             await _userManager.AddToRoleAsync(user, userSignupDto.Role);
 

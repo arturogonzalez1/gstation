@@ -2,14 +2,14 @@
 using GStation.Core.Models;
 using GStation.Core.Models.DTOs;
 
-namespace GStation.Mapping
+namespace GStation.Core.Mapping
 {
     public class UserMapping : Profile
     {
         public UserMapping()
         {
             CreateMap<UserSignupDto, ApplicationUser>()
-                .ForMember(user => user.UserName, map => map.MapFrom(dto => dto.Name))
+                .ForMember(user => user.UserName, map => map.MapFrom(dto => dto.Email))
                 .ReverseMap();
         }
     }
