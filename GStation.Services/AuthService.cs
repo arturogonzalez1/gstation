@@ -19,22 +19,22 @@ namespace GStation.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly IPersonService _personService;
 
         public AuthService(IMapper mapper, UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+            SignInManager<ApplicationUser> signInManager, IConfiguration configuration,
+            IPersonService personService)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _personService = personService;
         }
 
-        public async Task Signup(UserSignupDto userSignupDto)
+        public async Task Signup(ApplicationUser user, string password, string role)
         {
-
-            var user = _mapper.Map<ApplicationUser>(userSignupDto);
-
-            var result = await _userManager.CreateAsync(user, userSignupDto.Password);
+            var result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)
             {
@@ -43,18 +43,18 @@ namespace GStation.Services
                 throw new CustomValidationException(errors);
             }
 
-            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, userSignupDto.Role));
-            await _userManager.AddToRoleAsync(user, userSignupDto.Role);
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, role));
+            await _userManager.AddToRoleAsync(user, role);
 
         }
 
-        public async Task<Response<UserLoginTokenDto>> Login(UserLoginDto userLoginDto)
+        public async Task<UserLoginTokenDto> Login(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
+            var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null) throw new CustomValidationException(ErrorConstants.INVALID_CREDENTIALS);
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, userLoginDto.Password, true);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, password, true);
 
             if (!result.Succeeded)
             {
@@ -63,17 +63,15 @@ namespace GStation.Services
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            var userLoginTokenDto = GetUserLoginToken(user, roles);
+            user.Person = await _personService.GetPersonById(user.PersonId);
 
-            var response = new Response<UserLoginTokenDto>();
+            var userLoginTokenDto = GetUserLoginToken(user, roles.FirstOrDefault());
 
-            response.Data = userLoginTokenDto;
-
-            return response;
+            return userLoginTokenDto;
 
         }
 
-        private UserLoginTokenDto GetUserLoginToken(ApplicationUser user, IList<string> roles)
+        private UserLoginTokenDto GetUserLoginToken(ApplicationUser user, string role)
         {
             var claims = new List<Claim>
             {
@@ -81,16 +79,21 @@ namespace GStation.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            foreach (var rol in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, rol));
-            }
+            claims.Add(new Claim(ClaimTypes.Role, role));
 
             var expiration = DateTime.UtcNow.AddHours(1);
 
             var token = BuildToken(claims, expiration);
 
-            return new UserLoginTokenDto(token, expiration);
+            return new UserLoginTokenDto()
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                CompleteName = user.Person.GetCompleteName(),
+                Role = role,
+                Token = token,
+                Expiration = expiration,
+            };
         }
 
         private string BuildToken(List<Claim> claims, DateTime expiration)

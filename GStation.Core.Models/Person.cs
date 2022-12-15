@@ -10,4 +10,9 @@
         public string PhoneNumber { get; set; }
         public ApplicationUser User { get; set; }
     }
+
+    public static class PersonTools
+    {
+        public static string GetCompleteName(this Person person) => $"{person.Name} {person.SecondName} {person.PaternalSurname} {person.MaternalSurname} ";
+    }
 }

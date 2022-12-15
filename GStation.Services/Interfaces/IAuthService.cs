@@ -5,7 +5,7 @@ namespace GStation.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task Signup(UserSignupDto userSignupDto);
-        Task<Response<UserLoginTokenDto>> Login(UserLoginDto userLoginDto);
+        Task Signup(ApplicationUser user, string password, string role);
+        Task<UserLoginTokenDto> Login(string email, string password);
     }
 }

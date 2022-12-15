@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GStation.Core.Models\GStation.Core.Models.csproj" />
+    <ProjectReference Include="..\GStation.Persistence.Repositories\GStation.Persistence.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

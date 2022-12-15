@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using GStation.Persistence.Repositories;
+using GStation.Persistence.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +50,9 @@ builder.Services.AddAutoMapper(builder => builder.AddProfiles(new List<Profile>
 }));
 
 builder.Services.AddTransient<IAuthService, AuthService>();
+
+builder.Services.AddTransient<IPersonService, PersonService>();
+builder.Services.AddTransient<IPersonRepository, PersonRepository>();
 
 builder.Services.AddCors(options =>
 {
