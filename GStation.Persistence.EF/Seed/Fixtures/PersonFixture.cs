@@ -8,7 +8,6 @@ namespace GStation.Persistence.EF.Seed.Fixtures
         { 
             Id = new Guid(),
             Name = String.Empty,
-            SecondName = String.Empty,
             PaternalSurname = String.Empty,
             MaternalSurname = String.Empty,
             PhoneNumber = String.Empty,

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GStation.Persistence.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221209044513_Create_Identity_Tables")]
-    partial class Create_Identity_Tables
+    [Migration("20221215182939_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,6 +87,9 @@ namespace GStation.Persistence.EF.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -116,6 +119,9 @@ namespace GStation.Persistence.EF.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("PersonId")
+                        .IsUnique();
+
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
@@ -132,6 +138,29 @@ namespace GStation.Persistence.EF.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("GStation.Core.Models.Person", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MaternalSurname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaternalSurname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -225,6 +254,17 @@ namespace GStation.Persistence.EF.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GStation.Core.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("GStation.Core.Models.Person", "Person")
+                        .WithOne("User")
+                        .HasForeignKey("GStation.Core.Models.ApplicationUser", "PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+                });
+
             modelBuilder.Entity("GStation.Core.Models.ApplicationUserRole", b =>
                 {
                     b.HasOne("GStation.Core.Models.ApplicationRole", "Role")
@@ -288,6 +328,11 @@ namespace GStation.Persistence.EF.Migrations
             modelBuilder.Entity("GStation.Core.Models.ApplicationUser", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("GStation.Core.Models.Person", b =>
+                {
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
