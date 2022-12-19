@@ -15,6 +15,11 @@ namespace GStation.Persistence.EF
         }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerAddress> CustomersAddresses { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,6 +44,21 @@ namespace GStation.Persistence.EF
                     .WithMany(r => r.UserRoles)
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
+            });
+
+            builder.Entity<CustomerAddress>(customerAddress =>
+            {
+                customerAddress.HasKey(ca => new { ca.CustomerId, ca.AddressId });
+
+                customerAddress.HasOne(ca => ca.Customer)
+                    .WithMany(c => c.Addresses)
+                    .HasForeignKey(c => c.CustomerId)
+                    .IsRequired();
+            });
+
+            builder.Entity<Customer>(customer =>
+            {
+                customer.Property(c => c.CreditLimit).HasPrecision(38, 18);
             });
 
         }
