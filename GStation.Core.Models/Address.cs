@@ -7,6 +7,7 @@
         public string Street { get; set; }
         public string Subdivision { get; set; }
         public string City { get; set; }
+        public Guid StateId { get; set; }
         public State State { get; set; }
     }
 }

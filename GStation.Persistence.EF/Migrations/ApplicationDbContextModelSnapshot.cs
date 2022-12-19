@@ -34,7 +34,7 @@ namespace GStation.Persistence.EF.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("StateId")
+                    b.Property<Guid>("StateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Street")
@@ -231,7 +231,8 @@ namespace GStation.Persistence.EF.Migrations
 
                     b.HasKey("CustomerId", "AddressId");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.ToTable("CustomersAddresses");
                 });
@@ -376,7 +377,9 @@ namespace GStation.Persistence.EF.Migrations
                 {
                     b.HasOne("GStation.Core.Models.State", "State")
                         .WithMany()
-                        .HasForeignKey("StateId");
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("State");
                 });

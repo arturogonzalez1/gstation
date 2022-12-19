@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GStation.Persistence.EF.Migrations
 {
-    public partial class Create_Customers_Realted_Tables : Migration
+    public partial class Create_Customers_Related_Tables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,7 +76,7 @@ namespace GStation.Persistence.EF.Migrations
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Subdivision = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +85,8 @@ namespace GStation.Persistence.EF.Migrations
                         name: "FK_Addresses_States_StateId",
                         column: x => x.StateId,
                         principalTable: "States",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,7 +126,8 @@ namespace GStation.Persistence.EF.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CustomersAddresses_AddressId",
                 table: "CustomersAddresses",
-                column: "AddressId");
+                column: "AddressId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_CountryId",

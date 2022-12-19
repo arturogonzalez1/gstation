@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GStation.Persistence.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221215224100_Create_Customers_Realted_Tables")]
-    partial class Create_Customers_Realted_Tables
+    [Migration("20221219184949_Create_Customers_Related_Tables")]
+    partial class Create_Customers_Related_Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace GStation.Persistence.EF.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("StateId")
+                    b.Property<Guid>("StateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Street")
@@ -233,7 +233,8 @@ namespace GStation.Persistence.EF.Migrations
 
                     b.HasKey("CustomerId", "AddressId");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.ToTable("CustomersAddresses");
                 });
@@ -378,7 +379,9 @@ namespace GStation.Persistence.EF.Migrations
                 {
                     b.HasOne("GStation.Core.Models.State", "State")
                         .WithMany()
-                        .HasForeignKey("StateId");
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("State");
                 });

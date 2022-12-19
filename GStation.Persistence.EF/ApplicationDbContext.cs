@@ -54,6 +54,9 @@ namespace GStation.Persistence.EF
                     .WithMany(c => c.Addresses)
                     .HasForeignKey(c => c.CustomerId)
                     .IsRequired();
+
+                customerAddress.HasIndex(ca => ca.AddressId)
+                    .IsUnique();
             });
 
             builder.Entity<Customer>(customer =>
