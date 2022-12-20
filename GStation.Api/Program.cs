@@ -60,6 +60,9 @@ builder.Services.AddTransient<IPersonRepository, PersonRepository>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 
+builder.Services.AddTransient<ILocationService, LocationService>();
+builder.Services.AddTransient<ILocationRepository, LocationRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
