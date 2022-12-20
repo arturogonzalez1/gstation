@@ -6,7 +6,7 @@ namespace GStation.Core.Models
     {
         public Guid Id { get; set; }
         public string RFC { get; set; }
-        public string BussinessName { get; set; }
+        public string BusinessName { get; set; }
         public string NumRegIDTrib { get; set; }
         public decimal CreditLimit { get; set; }
         public MonthDayPaymentEnum MonthDayPayment { get; set; }

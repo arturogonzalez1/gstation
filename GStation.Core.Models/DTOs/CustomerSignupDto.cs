@@ -9,7 +9,7 @@ namespace GStation.Core.Models.DTOs
         [StringLength(13, ErrorMessage = ValidationConstants.STRING_LENGTH)]
         public string RFC { get; set; }
         [StringLength(100, ErrorMessage = ValidationConstants.STRING_LENGTH)]
-        public string BussinessName { get; set; }
+        public string BusinessName { get; set; }
         [StringLength(40, ErrorMessage = ValidationConstants.STRING_LENGTH)]
         public string NumRegIDTrib { get; set; }
         [Range(1000, 1000000, ErrorMessage = ValidationConstants.RANGE)]

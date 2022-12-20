@@ -189,7 +189,7 @@ namespace GStation.Persistence.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BussinessName")
+                    b.Property<string>("BusinessName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("CreditLimit")
