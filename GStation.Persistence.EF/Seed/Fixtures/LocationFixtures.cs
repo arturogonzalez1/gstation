@@ -2,7 +2,7 @@
 
 namespace GStation.Persistence.EF.Seed.Fixtures
 {
-    public static class UbicationFixtures
+    public static class LocationFixtures
     {
         public static List<State> GetMexicoStates()
         {
