@@ -15,24 +15,22 @@ namespace GStation.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly IPersonService _personService;
 
-        public AuthService(IMapper mapper, UserManager<ApplicationUser> userManager, 
+        public AuthService(UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager, IConfiguration configuration,
             IPersonService personService)
         {
-            _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _personService = personService;
         }
 
-        public async Task Signup(ApplicationUser user, string password, string role)
+        public async Task<ApplicationUser> Signup(ApplicationUser user, string password, string role)
         {
             var result = await _userManager.CreateAsync(user, password);
 
@@ -45,6 +43,8 @@ namespace GStation.Services
 
             await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, role));
             await _userManager.AddToRoleAsync(user, role);
+
+            return user;
 
         }
 
@@ -69,6 +69,11 @@ namespace GStation.Services
 
             return userLoginTokenDto;
 
+        }
+
+        public async Task DeleteUser(ApplicationUser user)
+        {
+            await _userManager.DeleteAsync(user);
         }
 
         private UserLoginTokenDto GetUserLoginToken(ApplicationUser user, string role)

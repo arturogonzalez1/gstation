@@ -47,12 +47,18 @@ builder.Services.AddAutoMapper(builder => builder.AddProfiles(new List<Profile>
 {
     new UserMapping(),
     new PersonMapping(),
+    new CustomerMapping(),
+    new AddressMapping(),
+    new CustomerAddressMapping(),
 }));
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services.AddTransient<IPersonService, PersonService>();
 builder.Services.AddTransient<IPersonRepository, PersonRepository>();
+
+builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddCors(options =>
 {

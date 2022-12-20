@@ -18,4 +18,15 @@ namespace GStation.Core.Models
 
         public ICollection<CustomerAddress> Addresses { get; set; }
     }
+
+    public static class CustomerExtensions
+    {
+        public static void RemovePerson(this Customer customer)
+        {
+            customer.Person = null;
+        }
+    }
+
 }
+
+

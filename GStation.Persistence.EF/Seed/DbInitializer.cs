@@ -27,6 +27,7 @@ namespace GStation.Persistence.EF.Seed
 
                     roleManager.Seed();
                     userManager.Seed(isDevelop);
+                    context.SeedUbication();
 
                 }
                 catch (Exception ex)
