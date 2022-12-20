@@ -12,8 +12,6 @@ namespace GStation.Core.Models.DTOs
         public string BusinessName { get; set; }
         [StringLength(40, ErrorMessage = ValidationConstants.STRING_LENGTH)]
         public string NumRegIDTrib { get; set; }
-        [Range(1000, 1000000, ErrorMessage = ValidationConstants.RANGE)]
-        public decimal CreditLimit { get; set; }
         public MonthDayPaymentEnum MonthDayPayment { get; set; }
         public DeadlineDaysEnum DeadLineDays { get; set; }
         public ModalityEnum Modality { get; set; }
