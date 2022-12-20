@@ -14,12 +14,14 @@ namespace GStation.Api.Controllers
         private readonly IMapper _mapper;
         private readonly ICustomerService _customerService;
         private readonly IAuthService _authService;
+        private readonly ILocationService _locationService;
 
-        public CustomerController(IMapper mapper, ICustomerService customerService, IAuthService authService)
+        public CustomerController(IMapper mapper, ICustomerService customerService, IAuthService authService, ILocationService locationService)
         {
             _mapper = mapper;
             _customerService = customerService;
             _authService = authService;
+            _locationService = locationService;
         }
 
         [HttpGet]
@@ -31,6 +33,11 @@ namespace GStation.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CustomerSignupDto customerSignupDto)
         {
+            foreach (var address in customerSignupDto.Addresses)
+            {
+                await _locationService.GetStateById(address.StateId);
+            }
+
             var user = _mapper.Map<ApplicationUser>(customerSignupDto);
 
             await _authService.Signup(user, customerSignupDto.Password, Role.CUSTOMER);
@@ -49,7 +56,7 @@ namespace GStation.Api.Controllers
                 throw;
             }
 
-            return Ok(customer);
+            return Ok();
         }
     }
 }
