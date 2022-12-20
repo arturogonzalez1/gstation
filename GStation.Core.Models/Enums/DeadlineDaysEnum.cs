@@ -4,6 +4,6 @@
     {
         Month = 1,
         TwoMonths = 2,
-        ThreeMonth = 3,
+        ThreeMonths = 3,
     }
 }
