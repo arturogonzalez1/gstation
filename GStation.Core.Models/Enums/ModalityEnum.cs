@@ -2,8 +2,8 @@
 {
     public enum ModalityEnum
     {
-        Credito = 1,
-        Debito = 2,
-        Efectivo = 3,
+        Credit = 1,
+        Debit = 2,
+        Cash = 3,
     }
 }
