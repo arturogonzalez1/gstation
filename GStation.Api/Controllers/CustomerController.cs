@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GStation.Api.Controllers
 {
-    [Route("api/customer")]
+    [Route("api/customers")]
     [ApiController]
     public class CustomerController : ControllerBase
     {

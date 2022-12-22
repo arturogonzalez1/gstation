@@ -14,6 +14,11 @@ namespace GStation.Persistence.Repositories
             _context = context;
         }
 
+        public async Task<State> GetStateById(Guid id)
+        {
+            return await _context.States.SingleOrDefaultAsync(state => state.Id == id);
+        }
+
         public async Task<List<State>> GetStatesByCountryId(Guid id)
         {
             return await _context.States.Where(s => s.CountryId == id).ToListAsync();
@@ -23,5 +28,6 @@ namespace GStation.Persistence.Repositories
         {
             return await _context.Countries.ToListAsync();
         }
+
     }
 }

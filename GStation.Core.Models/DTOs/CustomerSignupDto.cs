@@ -12,9 +12,12 @@ namespace GStation.Core.Models.DTOs
         public string BusinessName { get; set; }
         [StringLength(40, ErrorMessage = ValidationConstants.STRING_LENGTH)]
         public string NumRegIDTrib { get; set; }
+        [Range(1, 5, ErrorMessage = ValidationConstants.RANGE)]
         public MonthDayPaymentEnum MonthDayPayment { get; set; }
+        [Range(1, 3, ErrorMessage = ValidationConstants.RANGE)]
         public DeadlineDaysEnum DeadLineDays { get; set; }
+        [Range(1, 3, ErrorMessage = ValidationConstants.RANGE)]
         public ModalityEnum Modality { get; set; }
-        public ICollection<CustomerAddressSetDto> Addresses { get; set; }
+        public ICollection<AddressSetDto> Addresses { get; set; }
     }
 }
