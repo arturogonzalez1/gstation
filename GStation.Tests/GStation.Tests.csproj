@@ -6,4 +6,25 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="FluentAssertions" Version="6.9.0" />
+    <PackageReference Include="Microsoft.TestPlatform.AdapterUtilities" Version="17.5.0-preview-20221221-03" />
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.5.0-preview-20221221-03" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GStation.Core.Models\GStation.Core.Models.csproj" />
+    <ProjectReference Include="..\GStation.Core.Props\GStation.Core.Props.csproj" />
+    <ProjectReference Include="..\GStation.Api\GStation.Api.csproj" />
+    <ProjectReference Include="..\GStation.Services\GStation.Services.csproj" />
+    <ProjectReference Include="..\GStation.Mapping\GStation.Core.Mapping.csproj" />
+  </ItemGroup>
+
 </Project>

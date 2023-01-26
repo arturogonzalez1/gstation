@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Services", "GStati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Core.Mapping", "GStation.Mapping\GStation.Core.Mapping.csproj", "{1B27D048-5225-4717-BADD-2559D3C24850}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Core.Props", "GStation.Props\GStation.Core.Props.csproj", "{BC395311-B5D4-471A-9E6E-CF3A340664A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Core.Props", "GStation.Core.Props\GStation.Core.Props.csproj", "{BC395311-B5D4-471A-9E6E-CF3A340664A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

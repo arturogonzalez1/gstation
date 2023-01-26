@@ -1,4 +1,4 @@
-﻿namespace GStation.Props.Constants
+﻿namespace GStation.Core.Props.Constants
 {
     public static class Role
     {

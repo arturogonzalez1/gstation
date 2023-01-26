@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GStation.Core.Models;
 using GStation.Core.Models.DTOs;
-using GStation.Props.Constants;
+using GStation.Core.Props.Constants;
 using GStation.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

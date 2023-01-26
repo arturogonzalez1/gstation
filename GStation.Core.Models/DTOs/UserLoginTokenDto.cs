@@ -1,4 +1,4 @@
-﻿using GStation.Props.Constants;
+﻿using GStation.Core.Props.Constants;
 
 namespace GStation.Core.Models.DTOs
 {
