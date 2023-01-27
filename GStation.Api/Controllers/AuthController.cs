@@ -20,7 +20,7 @@ namespace GStation.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<Response<UserLoginTokenDto>>> Login([FromBody] UserLoginDto userLoginDto)
+        public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
 
             var userLoginTokenDto = await _authService.Login(userLoginDto.Email, userLoginDto.Password);
@@ -33,7 +33,7 @@ namespace GStation.Api.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<ActionResult> Signup([FromBody] UserSignupDto userSignupDto)
+        public async Task<IActionResult> Signup([FromBody] UserSignupDto userSignupDto)
         {
             var user = _mapper.Map<ApplicationUser>(userSignupDto);
 
