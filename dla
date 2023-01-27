@@ -1,0 +1,37 @@
+[1mdiff --git a/GStation.Api/appsettings.json b/GStation.Api/appsettings.json[m
+[1mindex faf3856..c784f43 100644[m
+[1m--- a/GStation.Api/appsettings.json[m
+[1m+++ b/GStation.Api/appsettings.json[m
+[36m@@ -7,7 +7,7 @@[m
+   },[m
+   "AllowedHosts": "*",[m
+   "ConnectionStrings": {[m
+[31m-    "DefaultConnection": "Server=DESKTOP-9C536EJ;Database=GStation;Trusted_Connection=True;"[m
+[32m+[m[32m    "DefaultConnection": "Server=DESKTOP-CBO7K1S;Database=GStation;Trusted_Connection=True;"[m
+   },[m
+   "JWT": {[m
+     "key": "1AvZVt9w9NxrfstcIgKy2vBB4HuIdKBFrfP2BUF-urPAPBz4r4DwH3fAhGubjKOAaISZVU7eEicPyBmbqQ7ZTCjKruXrzgajUcHIqAAInGjm9Iow7BVbO_8f1rS2l9YNjvM8ySr7e6R_e3HGwAYKVWHlq4UBlRP5DmxuR12jWbE"[m
+[1mdiff --git a/GStation.sln b/GStation.sln[m
+[1mindex 01b8633..37b3ae5 100644[m
+[1m--- a/GStation.sln[m
+[1m+++ b/GStation.sln[m
+[36m@@ -15,8 +15,6 @@[m [mProject("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Persistence.EF", "[m
+ EndProject[m
+ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Persistence.Repositories", "GStation.Persistence.Repositories\GStation.Persistence.Repositories.csproj", "{F4BB27EB-433D-42B4-9073-D109B2BD3D72}"[m
+ EndProject[m
+[31m-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Tests", "GStation.Tests\GStation.Tests.csproj", "{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}"[m
+[31m-EndProject[m
+ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Services", "GStation.Services\GStation.Services.csproj", "{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}"[m
+ EndProject[m
+ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Core.Mapping", "GStation.Mapping\GStation.Core.Mapping.csproj", "{1B27D048-5225-4717-BADD-2559D3C24850}"[m
+[36m@@ -45,10 +43,6 @@[m [mGlobal[m
+ 		{F4BB27EB-433D-42B4-9073-D109B2BD3D72}.Debug|Any CPU.Build.0 = Debug|Any CPU[m
+ 		{F4BB27EB-433D-42B4-9073-D109B2BD3D72}.Release|Any CPU.ActiveCfg = Release|Any CPU[m
+ 		{F4BB27EB-433D-42B4-9073-D109B2BD3D72}.Release|Any CPU.Build.0 = Release|Any CPU[m
+[31m-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU[m
+[31m-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU[m
+[31m-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU[m
+[31m-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Release|Any CPU.Build.0 = Release|Any CPU[m
+ 		{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU[m
+ 		{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU[m
+ 		{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU[m

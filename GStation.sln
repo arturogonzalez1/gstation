@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Persistence.EF", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Persistence.Repositories", "GStation.Persistence.Repositories\GStation.Persistence.Repositories.csproj", "{F4BB27EB-433D-42B4-9073-D109B2BD3D72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Tests", "GStation.Tests\GStation.Tests.csproj", "{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Services", "GStation.Services\GStation.Services.csproj", "{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GStation.Core.Mapping", "GStation.Mapping\GStation.Core.Mapping.csproj", "{1B27D048-5225-4717-BADD-2559D3C24850}"
@@ -45,10 +43,6 @@ Global
 		{F4BB27EB-433D-42B4-9073-D109B2BD3D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4BB27EB-433D-42B4-9073-D109B2BD3D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4BB27EB-433D-42B4-9073-D109B2BD3D72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E88E3038-C4E1-4115-9D32-4FF8D7F2D4D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF4C3F00-8138-4887-A571-E50ADD4A6AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
