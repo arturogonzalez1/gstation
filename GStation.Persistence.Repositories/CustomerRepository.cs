@@ -22,6 +22,14 @@ namespace GStation.Persistence.Repositories
             return customer;
         }
 
+        public async Task<Vehicle> CreateVehicle(Vehicle vehicle)
+        {
+            await _context.Vehicles.AddAsync(vehicle);
+            await _context.SaveChangesAsync();
+
+            return vehicle;
+        }
+
         public Task Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -32,9 +40,14 @@ namespace GStation.Persistence.Repositories
             return await _context.Customers.Include(c => c.Person).ToListAsync();
         }
 
-        public Task<Customer> GetById(Guid id)
+        public async Task<List<Vehicle>> GetAllVehicles(Guid customerId)
         {
-            throw new NotImplementedException();
+            return await _context.Vehicles.Where(v => v.CustomerId == customerId).ToListAsync();
+        }
+
+        public async Task<Customer> GetById(Guid id)
+        {
+            return await _context.Customers.SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public Task<Customer> Update(Customer customer)

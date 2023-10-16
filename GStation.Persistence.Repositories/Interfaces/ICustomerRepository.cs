@@ -9,5 +9,7 @@ namespace GStation.Persistence.Repositories.Interfaces
         Task<List<Customer>> GetAll();
         Task<Customer> Update(Customer customer);
         Task Delete(Guid id);
+        Task<Vehicle> CreateVehicle(Vehicle vehicle);
+        Task<List<Vehicle>> GetAllVehicles(Guid customerId);
     }
 }

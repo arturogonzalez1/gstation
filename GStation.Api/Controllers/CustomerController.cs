@@ -30,6 +30,12 @@ namespace GStation.Api.Controllers
             return await _customerService.GetAll();
         }
 
+        [HttpGet("{customerId}/vehicles")]
+        public async Task<List<Vehicle>> GetAllVehicles(Guid customerId)
+        {
+            return await _customerService.GetAllVehicles(customerId);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CustomerSignupDto customerSignupDto)
         {
@@ -55,6 +61,18 @@ namespace GStation.Api.Controllers
                 await _authService.DeleteUser(user);
                 throw;
             }
+
+            return Ok();
+        }
+
+        [HttpPost("{customerId}/create-vehicle")]
+        public async Task<ActionResult> PostVehicle([FromBody] CreateVehicleDto createVehicleDto, Guid customerId)
+        {
+            var vehicle = _mapper.Map<Vehicle>(createVehicleDto);
+
+            vehicle.CustomerId = customerId;
+
+            await _customerService.CreateVehicle(vehicle);
 
             return Ok();
         }

@@ -19,7 +19,12 @@ namespace GStation.Services
             return await _customerRepository.Create(customer);
         }
 
-        public async Task DeleteById(Guid id)
+        public async Task<Vehicle> CreateVehicle(Vehicle vehicle)
+        {
+            return await _customerRepository.CreateVehicle(vehicle);
+        }
+
+        public Task DeleteById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -29,12 +34,17 @@ namespace GStation.Services
             return await _customerRepository.GetAll();
         }
 
-        public async Task<Customer> GetById(Guid id)
+        public async Task<List<Vehicle>> GetAllVehicles(Guid customerId)
+        {
+            return await _customerRepository.GetAllVehicles(customerId);
+        }
+
+        public Task<Customer> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Customer> Update(Customer customer)
+        public Task<Customer> Update(Customer customer)
         {
             throw new NotImplementedException();
         }

@@ -50,6 +50,7 @@ builder.Services.AddAutoMapper(builder => builder.AddProfiles(new List<Profile>
     new CustomerMapping(),
     new AddressMapping(),
     new CustomerAddressMapping(),
+    new VehicleMapping(),
 }));
 
 builder.Services.AddTransient<IAuthService, AuthService>();

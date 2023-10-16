@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Data;
 
 namespace GStation.Persistence.EF.Seed
 {
@@ -32,8 +33,7 @@ namespace GStation.Persistence.EF.Seed
                 }
                 catch (Exception ex)
                 {
-
-                    throw;
+                    throw new Exception(ex.Message);
                 }
             }
 
