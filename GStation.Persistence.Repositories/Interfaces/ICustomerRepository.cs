@@ -11,5 +11,6 @@ namespace GStation.Persistence.Repositories.Interfaces
         Task Delete(Guid id);
         Task<Vehicle> CreateVehicle(Vehicle vehicle);
         Task<List<Vehicle>> GetAllVehicles(Guid customerId);
+        Task<Customer> GetByPersonId(Guid personId);
     }
 }

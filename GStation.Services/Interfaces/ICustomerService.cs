@@ -11,5 +11,6 @@ namespace GStation.Services.Interfaces
         Task DeleteById(Guid id);
         Task<Vehicle> CreateVehicle(Vehicle vehicle);
         Task<List<Vehicle>> GetAllVehicles(Guid customerId);
+        Task<Customer> GetCustomerByUserId(string userId);
     }
 }

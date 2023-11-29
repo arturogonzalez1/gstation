@@ -54,5 +54,10 @@ namespace GStation.Persistence.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Customer> GetByPersonId(Guid personId)
+        {
+            return await _context.Customers.SingleOrDefaultAsync(c => c.PersonId == personId);
+        }
     }
 }

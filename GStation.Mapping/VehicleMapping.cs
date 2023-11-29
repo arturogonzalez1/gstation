@@ -9,6 +9,7 @@ namespace GStation.Core.Mapping
         public VehicleMapping()
         {
             CreateMap<CreateVehicleDto, Vehicle>();
+            CreateMap<Vehicle, VehicleDto>();
         }
     }
 }

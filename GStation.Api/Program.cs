@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GStation.Persistence.Repositories;
 using GStation.Persistence.Repositories.Interfaces;
+using GStation.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,11 +73,13 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwagger();
 
 var app = builder.Build();
 
@@ -93,6 +96,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

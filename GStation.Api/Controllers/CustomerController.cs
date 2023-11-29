@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using GStation.Api.Helpers;
 using GStation.Core.Models;
 using GStation.Core.Models.DTOs;
 using GStation.Core.Props.Constants;
 using GStation.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GStation.Api.Controllers
@@ -30,10 +33,27 @@ namespace GStation.Api.Controllers
             return await _customerService.GetAll();
         }
 
-        [HttpGet("{customerId}/vehicles")]
-        public async Task<List<Vehicle>> GetAllVehicles(Guid customerId)
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpGet("vehicles")]
+        public async Task<ActionResult<List<VehicleDto>>> GetAllVehicles()
         {
-            return await _customerService.GetAllVehicles(customerId);
+            var userId = HttpContext.GetToken().GetUserId();
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var customer = await _customerService.GetCustomerByUserId(userId);
+
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+
+            var vehicles = await _customerService.GetAllVehicles(customer.Id);
+
+            return _mapper.Map<List<VehicleDto>>(vehicles);
         }
 
         [HttpPost]
@@ -65,7 +85,8 @@ namespace GStation.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("{customerId}/create-vehicle")]
+        [Authorize]
+        [HttpPost("create-vehicle")]
         public async Task<ActionResult> PostVehicle([FromBody] CreateVehicleDto createVehicleDto, Guid customerId)
         {
             var vehicle = _mapper.Map<Vehicle>(createVehicleDto);

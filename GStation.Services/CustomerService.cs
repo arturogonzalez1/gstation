@@ -8,10 +8,12 @@ namespace GStation.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IAuthService _authService;
 
         public CustomerService(IMapper mapper, ICustomerRepository customerRepository, IAuthService authService)
         {
             _customerRepository = customerRepository;
+            _authService = authService;
         }
 
         public async Task<Customer> Create(Customer customer)
@@ -47,6 +49,18 @@ namespace GStation.Services
         public Task<Customer> Update(Customer customer)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Customer> GetCustomerByUserId(string userId)
+        {
+            var person = await _authService.GetPersonByUserId(userId);
+
+            if (person == null)
+            {
+                return null;
+            }
+
+            return await _customerRepository.GetByPersonId(person.Id);
         }
     }
 }
