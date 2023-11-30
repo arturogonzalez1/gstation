@@ -85,17 +85,33 @@ namespace GStation.Api.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost("create-vehicle")]
-        public async Task<ActionResult> PostVehicle([FromBody] CreateVehicleDto createVehicleDto, Guid customerId)
+        public async Task<ActionResult<VehicleDto>> PostVehicle([FromBody] CreateVehicleDto createVehicleDto)
         {
+            var userId = HttpContext.GetToken().GetUserId();
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
             var vehicle = _mapper.Map<Vehicle>(createVehicleDto);
 
-            vehicle.CustomerId = customerId;
+            var customer = await _customerService.GetCustomerByUserId(userId);
+
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+
+            vehicle.CustomerId = customer.Id;
 
             await _customerService.CreateVehicle(vehicle);
 
-            return Ok();
+            var vehicleDto = _mapper.Map<VehicleDto>(vehicle);
+
+            return Ok(vehicleDto);
         }
     }
 }
