@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GStation.Persistence.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221220165139_initial")]
-    partial class initial
+    [Migration("20231130041820_initial_migration")]
+    partial class initial_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -284,6 +284,37 @@ namespace GStation.Persistence.EF.Migrations
                     b.ToTable("States");
                 });
 
+            modelBuilder.Entity("GStation.Core.Models.Vehicle", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Plate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VIN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Vehicles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -457,6 +488,17 @@ namespace GStation.Persistence.EF.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("GStation.Core.Models.Vehicle", b =>
+                {
+                    b.HasOne("GStation.Core.Models.Customer", "Customer")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("GStation.Core.Models.ApplicationRole", null)
@@ -511,6 +553,8 @@ namespace GStation.Persistence.EF.Migrations
             modelBuilder.Entity("GStation.Core.Models.Customer", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("GStation.Core.Models.Person", b =>

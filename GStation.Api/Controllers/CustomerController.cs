@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using GStation.Api.Helpers;
 using GStation.Core.Models;
 using GStation.Core.Models.DTOs;
 using GStation.Core.Props.Constants;
 using GStation.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GStation.Api.Controllers
@@ -28,6 +31,29 @@ namespace GStation.Api.Controllers
         public async Task<List<Customer>> Get()
         {
             return await _customerService.GetAll();
+        }
+
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpGet("vehicles")]
+        public async Task<ActionResult<List<VehicleDto>>> GetAllVehicles()
+        {
+            var userId = HttpContext.GetToken().GetUserId();
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var customer = await _customerService.GetCustomerByUserId(userId);
+
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+
+            var vehicles = await _customerService.GetAllVehicles(customer.Id);
+
+            return _mapper.Map<List<VehicleDto>>(vehicles);
         }
 
         [HttpPost]
@@ -57,6 +83,35 @@ namespace GStation.Api.Controllers
             }
 
             return Ok();
+        }
+
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpPost("create-vehicle")]
+        public async Task<ActionResult<VehicleDto>> PostVehicle([FromBody] CreateVehicleDto createVehicleDto)
+        {
+            var userId = HttpContext.GetToken().GetUserId();
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var vehicle = _mapper.Map<Vehicle>(createVehicleDto);
+
+            var customer = await _customerService.GetCustomerByUserId(userId);
+
+            if (customer == null)
+            {
+                return BadRequest();
+            }
+
+            vehicle.CustomerId = customer.Id;
+
+            await _customerService.CreateVehicle(vehicle);
+
+            var vehicleDto = _mapper.Map<VehicleDto>(vehicle);
+
+            return Ok(vehicleDto);
         }
     }
 }

@@ -8,5 +8,6 @@ namespace GStation.Services.Interfaces
         Task<ApplicationUser> Signup(ApplicationUser user, string password, string role);
         Task<UserLoginTokenDto> Login(string email, string password);
         Task DeleteUser(ApplicationUser user);
+        Task<Person> GetPersonByUserId(string userId);
     }
 }
