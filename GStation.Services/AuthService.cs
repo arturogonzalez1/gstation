@@ -76,6 +76,18 @@ namespace GStation.Services
             await _userManager.DeleteAsync(user);
         }
 
+        public async Task<Person> GetPersonByUserId(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new Exception(ErrorConstants.RECORD_NOTFOUND);
+            }
+
+            return await _personService.GetPersonById(user.PersonId);
+        }
+
         private UserLoginTokenDto GetUserLoginToken(ApplicationUser user, string role)
         {
             var claims = new List<Claim>

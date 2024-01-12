@@ -17,6 +17,7 @@ namespace GStation.Core.Models
         public Person Person { get; set; }
 
         public ICollection<CustomerAddress> Addresses { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 
     public static class CustomerExtensions

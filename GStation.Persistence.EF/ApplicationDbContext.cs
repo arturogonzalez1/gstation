@@ -20,6 +20,7 @@ namespace GStation.Persistence.EF
         public DbSet<CustomerAddress> CustomersAddresses { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
