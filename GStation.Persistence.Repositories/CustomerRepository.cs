@@ -14,7 +14,7 @@ namespace GStation.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<Customer> Create(Customer customer)
+        public async Task<Manager> Create(Manager customer)
         {
             await _context.Customers.AddAsync(customer);
             await _context.SaveChangesAsync();
@@ -22,7 +22,7 @@ namespace GStation.Persistence.Repositories
             return customer;
         }
 
-        public async Task<Vehicle> CreateVehicle(Vehicle vehicle)
+        public async Task<Team> CreateVehicle(Team vehicle)
         {
             await _context.Vehicles.AddAsync(vehicle);
             await _context.SaveChangesAsync();
@@ -35,27 +35,27 @@ namespace GStation.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<Customer>> GetAll()
+        public async Task<List<Manager>> GetAll()
         {
             return await _context.Customers.Include(c => c.Person).ToListAsync();
         }
 
-        public async Task<List<Vehicle>> GetAllVehicles(Guid customerId)
+        public async Task<List<Team>> GetAllVehicles(Guid customerId)
         {
             return await _context.Vehicles.Where(v => v.CustomerId == customerId).ToListAsync();
         }
 
-        public async Task<Customer> GetById(Guid id)
+        public async Task<Manager> GetById(Guid id)
         {
             return await _context.Customers.SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public Task<Customer> Update(Customer customer)
+        public Task<Manager> Update(Manager customer)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Customer> GetByPersonId(Guid personId)
+        public async Task<Manager> GetByPersonId(Guid personId)
         {
             return await _context.Customers.SingleOrDefaultAsync(c => c.PersonId == personId);
         }

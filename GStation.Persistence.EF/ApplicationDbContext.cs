@@ -15,12 +15,10 @@ namespace GStation.Persistence.EF
         }
 
         public DbSet<Person> Persons { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<CustomerAddress> CustomersAddresses { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Team> Vehicles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,7 +58,7 @@ namespace GStation.Persistence.EF
                     .IsUnique();
             });
 
-            builder.Entity<Customer>(customer =>
+            builder.Entity<Manager>(customer =>
             {
                 customer.Property(c => c.CreditLimit).HasPrecision(38, 18);
             });

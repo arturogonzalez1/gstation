@@ -16,12 +16,12 @@ namespace GStation.Services
             _authService = authService;
         }
 
-        public async Task<Customer> Create(Customer customer)
+        public async Task<Manager> Create(Manager customer)
         {
             return await _customerRepository.Create(customer);
         }
 
-        public async Task<Vehicle> CreateVehicle(Vehicle vehicle)
+        public async Task<Team> CreateVehicle(Team vehicle)
         {
             return await _customerRepository.CreateVehicle(vehicle);
         }
@@ -31,27 +31,27 @@ namespace GStation.Services
             throw new NotImplementedException();
         }
 
-        public async Task<List<Customer>> GetAll()
+        public async Task<List<Manager>> GetAll()
         {
             return await _customerRepository.GetAll();
         }
 
-        public async Task<List<Vehicle>> GetAllVehicles(Guid customerId)
+        public async Task<List<Team>> GetAllVehicles(Guid customerId)
         {
             return await _customerRepository.GetAllVehicles(customerId);
         }
 
-        public Task<Customer> GetById(Guid id)
+        public Task<Manager> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Customer> Update(Customer customer)
+        public Task<Manager> Update(Manager customer)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Customer> GetCustomerByUserId(string userId)
+        public async Task<Manager> GetCustomerByUserId(string userId)
         {
             var person = await _authService.GetPersonByUserId(userId);
 

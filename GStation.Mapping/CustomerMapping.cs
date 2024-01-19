@@ -8,7 +8,7 @@ namespace GStation.Core.Mapping
     {
         public CustomerMapping()
         {
-            CreateMap<CustomerSignupDto, Customer>()
+            CreateMap<CustomerSignupDto, Manager>()
                 .ForMember(customer => customer.Addresses, map => map
                     .MapFrom(customerSignupDto => customerSignupDto.Addresses
                         .Select(addressDto => new CustomerAddress

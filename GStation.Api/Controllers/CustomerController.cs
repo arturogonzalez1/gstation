@@ -28,7 +28,7 @@ namespace GStation.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Customer>> Get()
+        public async Task<List<Manager>> Get()
         {
             return await _customerService.GetAll();
         }
@@ -68,7 +68,7 @@ namespace GStation.Api.Controllers
 
             await _authService.Signup(user, customerSignupDto.Password, Role.CUSTOMER);
 
-            var customer = _mapper.Map<Customer>(customerSignupDto);
+            var customer = _mapper.Map<Manager>(customerSignupDto);
             customer.RemovePerson();
             customer.PersonId = user.PersonId;
 
@@ -96,7 +96,7 @@ namespace GStation.Api.Controllers
                 return BadRequest();
             }
 
-            var vehicle = _mapper.Map<Vehicle>(createVehicleDto);
+            var vehicle = _mapper.Map<Team>(createVehicleDto);
 
             var customer = await _customerService.GetCustomerByUserId(userId);
 

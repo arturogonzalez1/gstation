@@ -8,8 +8,8 @@ namespace GStation.Core.Mapping
     {
         public VehicleMapping()
         {
-            CreateMap<CreateVehicleDto, Vehicle>();
-            CreateMap<Vehicle, VehicleDto>();
+            CreateMap<CreateVehicleDto, Team>();
+            CreateMap<Team, VehicleDto>();
         }
     }
 }

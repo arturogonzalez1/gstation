@@ -4,13 +4,13 @@ namespace GStation.Persistence.Repositories.Interfaces
 {
     public interface ICustomerRepository
     {
-        Task<Customer> Create(Customer customer);
-        Task<Customer> GetById(Guid id);
-        Task<List<Customer>> GetAll();
-        Task<Customer> Update(Customer customer);
+        Task<Manager> Create(Manager customer);
+        Task<Manager> GetById(Guid id);
+        Task<List<Manager>> GetAll();
+        Task<Manager> Update(Manager customer);
         Task Delete(Guid id);
-        Task<Vehicle> CreateVehicle(Vehicle vehicle);
-        Task<List<Vehicle>> GetAllVehicles(Guid customerId);
-        Task<Customer> GetByPersonId(Guid personId);
+        Task<Team> CreateVehicle(Team vehicle);
+        Task<List<Team>> GetAllVehicles(Guid customerId);
+        Task<Manager> GetByPersonId(Guid personId);
     }
 }
